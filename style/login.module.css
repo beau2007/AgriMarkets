@@ -1,0 +1,111 @@
+
+.texte-inscription{
+    width: 70%;
+    position: relative;
+    left: 200px;
+    gap: 20px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.texte-inscription h1{
+    text-transform: uppercase;
+}
+
+.texte-inscription p{
+    font-size: 17px
+}
+
+.texte-inscription p a{
+    font-style: none;
+    text-decoration: none;
+    color: #87af51;
+}
+
+.form{
+    display: block;
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 80%;
+    height: 100%;
+    position: relative;
+    left: 200px;
+    gap: 20px;
+}
+
+.form label{
+    display: block;
+    font-weight: 100;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+
+.formulaire_entier{
+    display: flex;
+    gap: 0.2rem;
+}
+
+.check p{
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.identif{
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+}
+
+.reste input{
+    width: 20rem;
+    height: 30px;
+    border: 1px solid;
+}
+.reste label{
+    width: 20rem;
+    height: 30px;
+}
+
+.logique input{
+    width: 20rem;
+    height: 30px;
+    border: 1px solid ;
+}
+.logique label{
+    width: 20rem;
+    height: 30px;
+}
+
+.logique button{
+   margin: 30px 0px;
+   width: 20rem;
+   height: 30px;
+   background-color: #87af51;
+   color: #fff;
+   border: #87af51;
+   border-radius: 5px;
+}
+
+.div1{
+    width: 52%;
+    margin: 5px;
+}
+
+.colls input{
+    width: 13rem;
+    height: 30px;
+}
+
+.reste-pro .check2 input{
+    width: auto;
+    height: auto;
+}
+
+.check2{
+    gap: 15px;
+    margin: 20px;
+}

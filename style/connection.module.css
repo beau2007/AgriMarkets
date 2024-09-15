@@ -1,0 +1,59 @@
+
+/* body{
+    background-image: url(/wheat-7202481_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+
+.logo{
+    height: 30%;
+}
+
+.identification{
+    background-image: url(/asset/images/mile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.identifiant{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+}
+
+.identifiant h2{
+    text-transform: uppercase;
+}
+
+/* .identifiant label, input, button{
+    font-weight: 100;
+    font-size: 20px;
+    margin: 5px 0;
+    width: 50%;
+    gap: 15px;
+} */
+
+.identifiant input{
+    width: 20rem;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.322);
+    background-color: #e8f0fe;
+}
+
+.identifiant button{
+    background-color: #87af51;
+    border: 1px solid #87af51;
+    width: 20rem;
+    height: 40px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.identifiant a{
+    text-decoration: none;
+    color: #87af51;
+}

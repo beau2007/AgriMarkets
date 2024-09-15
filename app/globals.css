@@ -1,0 +1,301 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/Roboto.woff2) format('woff2');
+  }
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* ----------------------- POUR LOGO ET BOUTON-------------- */
+.aooo{
+  width: 100%;
+  height: 100px;
+  background-color: #fff;
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.header button{
+  position: relative;
+  left: 50rem;
+  top: 40px;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.header button:hover{
+  cursor: pointer;
+  color: #87af51;
+  text-decoration: underline;
+}
+
+/* -----------------------------DIVISION 1-------------- */
+.division1{
+  display: flex;
+  gap: 20px;
+  background: linear-gradient(rgba(0, 0, 0, 0.856), rgba(0, 0, 0, 0.538)), url(/asset/images/casca-arroz-443a6b6b7dbd1cdd6cd9ac2070abac6720519b5ef801c7860fee4641a88a127c.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 600px;
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+.description p{
+  font-size: 50px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-align: center;
+  color: rgba(44, 222, 44, 0.932);
+}
+.description button{
+  width: 270px;
+  height: 50px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  color: #fff;
+  position: relative;
+  top: 230px;
+  left: 190px;
+  
+}
+
+.never{
+  width: 50%;
+}
+
+.describe{
+  width: 23rem;
+  height: 100%;
+  background-color: #86af51dd;
+  position: relative;
+  left: -20px;
+  top: -10px;
+}
+
+.describe p{
+  text-align: justify;
+  align-items: center;
+  align-content: center;
+  margin: 10px 20px;
+  font-size: 1.5rem;
+}
+
+/* ----------------------SECTION 2-------------------------- */
+
+.contener{
+  width: 100%;
+  height: 750px;
+  background-color: #fff;
+
+}
+
+.contener-second{
+  margin: 30px;
+  /* border: 2px solid black; */
+  width: 80%;
+  height: 100%;
+  position: relative;
+  left: 10rem;
+}
+.contener-second h1{
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 60px;
+  font-weight: bold;
+  color: rgba(0, 128, 0, 0.897);
+}
+.contener-second p{
+  text-align: center;
+  font-size: 25px;
+  
+
+}
+
+.contener h1{
+  font-size: 50px;
+  text-transform: uppercase;
+  text-align: center;
+  align-items: center;
+
+}
+
+.contener p{
+  font-size: 20px;
+  align-items: center;
+  text-align: center;
+}
+
+.contener button{
+  border: 2px solid #87af51;
+  width: 30%;
+  height: 7%;
+  text-transform: capitalize;
+  color: #87af51;
+  position: relative;
+  top: 10px;
+  left: 42rem;
+}
+
+.contener button:hover{
+  background-color: #87af51;
+  color: #fff;
+}
+
+.contener-ol{
+  display: flex;
+  flex-direction: row;
+}
+
+.contener-ol-abs{
+  position: relative;
+  width: 50%;
+  display: flex;
+  margin: 30px;
+}
+
+.cercle1{
+  width: 300px;
+  height: 300px;
+  background-color: #bbd9a3bc;
+  border-radius: 50%;
+  position: relative;
+  left: 80px;
+}
+
+.cercle2{
+  width: 300px;
+  height: 300px;
+  background-color: #cecac498;
+  border-radius: 50%;
+  position: relative;
+  right: 30px;
+
+}
+
+.contener-ol-text{
+  width: 50%;
+  gap: 20px;
+
+}
+
+.contener-ol-text P{
+  font-size: 20px;
+  font-style: normal;
+  text-align: justify;
+  margin: 20px 15px;
+  padding: 10px; 
+
+}
+
+
+/* -----------------------------DIVISION 3----------------------- */
+
+/* ------------------------------------DIVISION 4---------------------------- */
+
+.contener-n4{
+  width: 100%;
+  height: 750px;
+  background-color: #ffffffe1;
+  margin-top: 20px;
+}
+
+.contener-pro-n4{
+    margin: 10px 20px;
+}
+
+.contener-n4 h1{
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  margin: 3rem 16rem;
+
+}
+
+.text-n4{
+  width: 40%;
+  position: relative;
+  left: 30%;
+}
+
+.text-n4 p{
+  text-align: center;
+}
+
+.contener-image img{
+  position: relative;
+  left: 30px;
+  margin: 6rem 16rem;
+}
+/* ----------------------RESPONSIVE--------------- */
+
+/* @media(width:100px and max-width:400px){
+  .division1{
+      display: flex;
+      flex-direction: column;
+  }
+
+  .contener{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contener-second{
+    display: flex;
+    flex-direction: column;
+  }
+} */
