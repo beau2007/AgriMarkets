@@ -1,0 +1,114 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Utilisateur {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  nom_user      String
+  prenom_user   String
+  email         String     @unique
+  telephone     String?
+  password      String
+  role          String
+  commandes     Commande[]
+  messages      Message[]
+  client        Client?
+  admin         Admin?
+  agriculteur   Agriculteur?
+}
+
+model Client {
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  utilisateur     Utilisateur @relation(fields: [utilisateurId], references: [id])
+  utilisateurId   String     @unique @db.ObjectId
+  paniers         Panier[]
+}
+
+model Admin {
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  utilisateur     Utilisateur @relation(fields: [utilisateurId], references: [id])
+  utilisateurId   String     @unique @db.ObjectId
+}
+
+model Agriculteur {
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  utilisateur     Utilisateur @relation(fields: [utilisateurId], references: [id])
+  utilisateurId   String     @unique @db.ObjectId
+  produits        Produit[]
+}
+
+model Produit {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  nom_produits  String
+  quantite      Int
+  prix          Float
+  imageUrl      String?
+  categorie     String
+  agriculteur   Agriculteur @relation(fields: [agriculturId], references: [id])
+  agriculturId  String     @db.ObjectId
+  panierProduits PanierProduit[]
+  commandeProduits CommandeProduit[]
+}
+
+model Panier {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  dateCreation  DateTime   @default(now())
+  client        Client     @relation(fields: [clientId], references: [id])
+  clientId      String     @db.ObjectId
+  panierProduits PanierProduit[]
+}
+
+model PanierProduit {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  panier    Panier  @relation(fields: [panierId], references: [id])
+  panierId  String  @db.ObjectId
+  produit   Produit @relation(fields: [produitId], references: [id])
+  produitId String  @db.ObjectId
+  quantite  Int
+
+  @@unique([panierId, produitId])
+}
+
+model Commande {
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  date_commande   DateTime   @default(now())
+  etat_commande   Boolean    @default(false)
+  utilisateur     Utilisateur @relation(fields: [utilisateurId], references: [id])
+  utilisateurId   String     @db.ObjectId
+  commandeProduits CommandeProduit[]
+  paiement        Paiement?
+}
+
+model CommandeProduit {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  commande    Commande @relation(fields: [commandeId], references: [id])
+  commandeId  String  @db.ObjectId
+  produit     Produit @relation(fields: [produitId], references: [id])
+  produitId   String  @db.ObjectId
+  quantite    Int
+
+  @@unique([commandeId, produitId])
+}
+
+model Paiement {
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  mode_paiement   String
+  date_paiement   DateTime   @default(now())
+  heure_paiement  DateTime   @default(now())
+  commande        Commande   @relation(fields: [commandeId], references: [id])
+  commandeId      String     @unique @db.ObjectId
+}
+
+model Message {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  contenu       String
+  date_envoi    DateTime   @default(now())
+  expediteur    Utilisateur @relation(fields: [expediteurId], references: [id])
+  expediteurId  String     @db.ObjectId
+  destinataire  String
+}
