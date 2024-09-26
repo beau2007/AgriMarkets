@@ -1,5 +1,5 @@
 import Image from "next/image";
-import style from "../style/connection.module.css";
+import style from "../../style/connection.module.css";
 
 function Restartpassword() {
   return (

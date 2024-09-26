@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div>
-      {!isAuthenticated ? <LandingPage /> : <ComposantApp />}
+      {!isAuthenticated ? <LandingPage />:<ComposantApp />}
     </div>
   );
 }

@@ -55,6 +55,12 @@ export async function POST(request) {
           utilisateur: { connect: { id: newUser.id } }
         }
       });
+    }else if (role === 'livreur') {
+      await prisma.admin.create({
+        data: {
+          utilisateur: { connect: { id: newUser.id } }
+        }
+      });
     }
 
     // Ne pas renvoyer le mot de passe dans la réponse

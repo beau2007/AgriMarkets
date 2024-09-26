@@ -1,19 +1,37 @@
-'use client'
+'use client';
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
+import Formpublication from '../Forms/Publication'; // Importation du formulaire
 
-function HeaderApp(){
-    const [showCartMenu, setShowCartMenu] = useState(false);
-    const [showUserMenu, setShowUserMenu] = useState(false);
-  
-    const toggleCartMenu = () => setShowCartMenu(!showCartMenu);
-    const toggleUserMenu = () => setShowUserMenu(!showUserMenu);
+function HeaderApp() {
+  const [showCartMenu, setShowCartMenu] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showForm, setShowForm] = useState(false); // État pour le formulaire pop-up
+
+  const toggleCartMenu = () => setShowCartMenu(!showCartMenu);
+  const toggleUserMenu = () => setShowUserMenu(!showUserMenu);
+
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    // Appel API pour récupérer le rôle de l'utilisateur connecté
+    const fetchUserRole = async () => {
+      const userRole = await getUserRole(); // Ex: 'agriculteur', 'client'
+      setRole(userRole);
+    };
+
+    fetchUserRole();
+  }, []);
+
+  const handleCloseForm = () => {
+    setShowForm(false); // Ferme le formulaire
+  };
     return(
         <>
-       <nav className="bg-white dark:bg-green-600 fixed w-full z-20 -top-4 start-0 border-b border-gray-200 dark:border-gray-600">
+       <nav className="bg-white dark:bg-green-600 fixed w-full z-10 -top-4 start-0 border-b border-gray-200 dark:border-gray-600">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="/asset/images/logo.webp" className="h-8" alt="AgriMarket Logo"/>
@@ -72,6 +90,19 @@ function HeaderApp(){
                         <Link href="">
                             <button type="button" class="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-white-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Log Out</button>
                         </Link>
+                         {/* Bouton "Publier un produit" affiché si l'utilisateur est agriculteur */}
+                        {role === 'agriculteur' && (
+                        <button
+                            type="button"
+                            className="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-4 py-2"
+                            onClick={() => setShowForm(true)} // Ouvre le formulaire pop-up
+                        >
+                            Publier un produit
+                        </button>
+                        )}
+
+                        {/* Affichage du formulaire en pop-up */}
+                        {showForm && <Formpublication onClose={handleCloseForm} />}
                     </div>
 
                     

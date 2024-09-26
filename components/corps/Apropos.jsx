@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function CompanyDescription() {
   return (
-    <div id="apropos" className="bg-gray-100 min-h-screen">
+    <div id="apropos" className="bg-gray-50 min-h-screen">
 
       {/* Main Section */}
       <main className="container mx-auto py-12 px-6">
@@ -17,27 +17,26 @@ export default function CompanyDescription() {
 
         {/* Features Section */}
         <div className="mt-12">
-          <h3 className="text-3xl font-semibold text-green-600 text-center mb-8">Our patner</h3>
+          <h3 className="text-3xl font-semibold text-green-600 text-center mb-8">equipe d'AgriMarket</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-2xl font-semibold mb-4">Fresh Vegetables</h4>
+              <h4 className="text-2xl font-semibold mb-4">Developpeur</h4>
               <p className="text-gray-700">
                 We offer a variety of fresh, locally grown vegetables. From leafy greens to root vegetables, all our
                 produce is harvested at peak freshness.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-2xl font-semibold mb-4">Organic Fruits</h4>
+              <h4 className="text-2xl font-semibold mb-4">Directeur Général</h4>
               <p className="text-gray-700">
                 Our selection of organic fruits includes apples, berries, citrus fruits, and more. Grown without
                 pesticides, ensuring they are safe and healthy.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-2xl font-semibold mb-4">Farm Equipment</h4>
+              <h4 className="text-2xl font-semibold mb-4">equipe de livreur</h4>
               <p className="text-gray-700">
-                We also supply modern farming equipment to support farmers in improving productivity and efficiency in
-                their operations.
+                nous avons une équipe de livreur qualifier qui s'applique à leurs tache afin de vous satisfaire 
               </p>
             </div>
           </div>

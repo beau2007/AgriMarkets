@@ -1,4 +1,4 @@
-import Restartpassword from "../../components/Restartpassword";
+import Restartpassword from "../../components/Forms/Restartpassword";
 
 
 

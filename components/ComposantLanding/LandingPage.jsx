@@ -1,10 +1,25 @@
+'use client'
 import Header from '../header/Header'
 import Carousel from '../corps/Caroussel'
 import Footer from '../footer/Footer'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 function LandingPage(){
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Remplace cela par la logique d'authentification réelle
+
+    const handleExploreClick = () => {
+        if (!isLoggedIn) {
+            // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+            window.location.href = '/login'; // Assure-toi que la route /login est correcte
+        } else {
+            // Redirige vers la page Explorer Marché
+            window.location.href = '/marcher';
+        }
+    };
+
     return(
         <>
 
@@ -28,7 +43,7 @@ function LandingPage(){
                             
                         </div>
                     </div>
-                    <Link href="/marcher"><button type="button" class="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-16 py-2 m-16 text-center dark:bg-white-600 dark:hover:bg-green-700 dark:focus:ring-green-800">EXPLORER MARCHER</button></Link>
+                    <Link href="/marcher"><button onClick={handleExploreClick} type="button" class="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-16 py-2 m-16 text-center dark:bg-white-600 dark:hover:bg-green-700 dark:focus:ring-green-800">EXPLORER MARCHER</button></Link>
                 </div>
             </div>
 
@@ -74,7 +89,7 @@ function LandingPage(){
                 
             </div>
             
-            {/* <Footer/>         */}
+            <Footer/>
     </>
     )
 }

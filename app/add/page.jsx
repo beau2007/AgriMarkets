@@ -114,7 +114,8 @@ export default function RegisterForm() {
         >
           <option value="client">Client</option>
           <option value="agriculteur">Agriculteur</option>
-          <option value="admin">Admin</option>
+          <option value="admin">Administrateur</option>
+          <option value="livreur">livreur</option>
         </select>
       </div>
       <button 

@@ -1,7 +1,22 @@
+'use client'
 import Link from "next/link"   
 import style from '../../style/Header.module.css'
+import { useState } from "react";
 
 export default function menu (){
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Remplace cela par la logique d'authentification réelle
+
+  const handleExploreClick = () => {
+      if (!isLoggedIn) {
+          // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+          window.location.href = '/login'; // Assure-toi que la route /login est correcte
+      } else {
+          // Redirige vers la page Explorer Marché
+          window.location.href = '/marcher';
+      }
+  };
+
     return(
         <>
               <nav class="bg-white dark:bg-green-600 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
@@ -28,13 +43,13 @@ export default function menu (){
                       <a href="#" class="block py-2 px-3 text-white bg-bleu-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-gray-200" aria-current="page">Home</a>
                     </li>
                     <li>
-                      <a href="#apropos" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-gray-200 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About Us</a>
+                      <a onClick={handleExploreClick} href="#apropos" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-gray-200 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About Us</a>
                     </li>
                     <li>
                       <a href="#Noservice" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-gray-200 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
                     </li>
                     <li>
-                      <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-gray-200 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                      <a onClick={handleExploreClick} href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-gray-200 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
                     </li>
                   </ul>
                 </div>
