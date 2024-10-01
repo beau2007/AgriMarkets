@@ -20,9 +20,12 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.9.0",
     "next": "14.2.5",
+    "next-auth": "^4.24.8",
     "prisma": "^5.19.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
+    "react-spinners": "^0.14.1"
   },
   "devDependencies": {
     "@types/node": "22.5.0",
