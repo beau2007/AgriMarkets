@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "lib/mongodb.js", "lib/prisma.js"  ],
+, "lib/mongodb.js", "lib/prisma.js", "app/api/auth/[...nextauth]/authOptions.js", "app/api/auth/[...nextauth]/route.js", "app/providers.jsx", "app/AuthWrapper.jsx"  ],
   "exclude": [
     "node_modules"
   ]
