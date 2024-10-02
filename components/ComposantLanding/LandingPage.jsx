@@ -43,7 +43,7 @@ function LandingPage(){
                             
                         </div>
                     </div>
-                    <Link href="/marcher"><button onClick={handleExploreClick} type="button" class="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-16 py-2 m-16 text-center dark:bg-white-600 dark:hover:bg-green-700 dark:focus:ring-green-800">EXPLORER MARCHER</button></Link>
+                    <Link href="/marcher"><button  type="button" class="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-16 py-2 m-16 text-center dark:bg-white-600 dark:hover:bg-green-700 dark:focus:ring-green-800">EXPLORER MARCHER</button></Link>
                 </div>
             </div>
 

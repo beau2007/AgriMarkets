@@ -9,7 +9,7 @@ export async function POST(request) {
 
     // Vérification de base des champs requis
     if (!nom_user || !prenom_user || !email || !password || !role) {
-      return NextResponse.json({ error: "Tous les champs requis doivent être remplis" }, { status: 400 });
+      return NextResponse.json({ error: "Tous les champs requis doivent être remplis" }, { status: 401 });
     }
 
     // Vérifier si l'utilisateur existe déjà
@@ -49,14 +49,14 @@ export async function POST(request) {
           utilisateur: { connect: { id: newUser.id } }
         }
       });
-    } else if (role === 'admin') {
-      await prisma.admin.create({
+    } else if (role === 'administrateur') {
+      await prisma.administrateur.create({
         data: {
           utilisateur: { connect: { id: newUser.id } }
         }
       });
-    }else if (role === 'livreur') {
-      await prisma.admin.create({
+    } else if (role === 'livreur') {
+      await prisma.livreur.create({
         data: {
           utilisateur: { connect: { id: newUser.id } }
         }
@@ -66,7 +66,13 @@ export async function POST(request) {
     // Ne pas renvoyer le mot de passe dans la réponse
     const { password: _, ...userWithoutPassword } = newUser;
 
-    return NextResponse.json(userWithoutPassword, { status: 201 });
+    // Redirection après l'inscription réussie
+    return NextResponse.json({
+      user: userWithoutPassword,
+      message: "Inscription réussie. Vous allez être redirigé vers la page de connexion.",
+      redirect: "/login"  // L'URL de redirection
+    }, { status: 201 });
+
   } catch (error) {
     console.error("Erreur lors de l'enregistrement:", error);
     return NextResponse.json({ error: "Une erreur est survenue lors de l'enregistrement" }, { status: 500 });

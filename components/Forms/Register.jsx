@@ -1,12 +1,12 @@
 "use client"
 import { useState} from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 
-function Register(){
+const Register= () => {
 
-    // const router = useRouter();
+    const router = useRouter();
 
     const [formData, setFormData] = useState({
         first_name: '',
@@ -34,7 +34,7 @@ function Register(){
           if (response.ok) {
             const data = await response.json()
             console.log('Utilisateur enregistré:', data)
-            // router.push('/login')
+            router.push('/login')
             // Rediriger ou afficher un message de succès
           } else {
             const error = await response.json()
@@ -46,7 +46,6 @@ function Register(){
           // Afficher un message d'erreur
         }
       }
-
     return ( 
         <>   
             <div className=" w-full">
@@ -94,7 +93,7 @@ function Register(){
                             >
                             <option value="client">Client</option>
                             <option value="agriculteur">Agriculteur</option>
-                            <option value="admin">Admin</option>
+                            <option value="admin">Administateur</option>
                             <option value="livreur">Livreur</option>
                         </select>
                     </div>
