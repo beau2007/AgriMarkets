@@ -105,7 +105,7 @@ function HeaderApp() {
               </button>
 
               {/* Bouton "Publier un produit" affiché si l'utilisateur est agriculteur */}
-              {user.role === '' && (
+              {user.role === 'agriculteur' && (
                 <button
                   type="button"
                   className="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-4 py-2"

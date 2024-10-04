@@ -6,16 +6,15 @@ export default function PublishProductForm({ closeModal }) {
     quantite: '',
     prix: '',
     categorie: '',
+    image: null,
   });
-
-  const [image, setImage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    setFormData({ ...formData, image: e.target.files[0] });
   };
 
   const handleSubmit = async (e) => {
@@ -26,8 +25,8 @@ export default function PublishProductForm({ closeModal }) {
     formDataToSend.append('quantite', formData.quantite);
     formDataToSend.append('prix', formData.prix);
     formDataToSend.append('categorie', formData.categorie);
-    if (image) {
-      formDataToSend.append('image', image);
+    if (formData.image) {
+      formDataToSend.append('image', formData.image);
     }
 
     const response = await fetch('/api/produit', {
@@ -44,9 +43,7 @@ export default function PublishProductForm({ closeModal }) {
   };
 
   return (
-    
     <form onSubmit={handleSubmit} className="space-y-4">
-
       <h1 className="text-4xl font-bold text-green-700 mb-6 capitalize">publier vos produits</h1>
       {/* Formulaire pour la publication du produit */}
       <div>
@@ -91,8 +88,6 @@ export default function PublishProductForm({ closeModal }) {
         />
       </div>
 
-      
-
       <div>
         <label className="block text-sm font-medium text-gray-700">
           Téléverser une image
@@ -100,6 +95,7 @@ export default function PublishProductForm({ closeModal }) {
         <input
           type="file"
           accept="image/*"
+          name="image"
           onChange={handleImageChange}
           className="w-full border border-gray-300 p-2 rounded-lg"
         />
