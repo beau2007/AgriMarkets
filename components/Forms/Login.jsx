@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
 import Image from 'next/image'
 import Link from 'next/link'
@@ -37,10 +37,11 @@ const Login = () => {
       setIsLoading(false)
     }
   }
-
+  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
 
   return (
     <section className={style.identification}>
@@ -69,8 +70,9 @@ const Login = () => {
               </div>
               <div>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe</label>
+                <div className="inline-flex w-full">
                 <input 
-                  type="password" 
+                  type={showPassword ? 'text' : 'password'} 
                   name="password" 
                   id="password" 
                   placeholder="••••••••" 
@@ -81,6 +83,7 @@ const Login = () => {
                 <button type="button" onClick={togglePasswordVisibility}>
                     {showPassword ? '🙈' : '👁️'}
                 </button>
+                </div>
               </div>
 
               <div className="flex items-center justify-between">
