@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
       // Gérer le téléversement de l'image
-      const { nom_produit, quantite, prix, categorie } = req.body;
+      const { nom_produit, quantite, prix, categorie, image } = req.body;
       const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
 
       // Enregistrer les données du produit et l'URL de l'image dans la base de données
