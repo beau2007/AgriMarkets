@@ -2,6 +2,7 @@
 import { useState} from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
 
 
 const Register= () => {
@@ -21,6 +22,23 @@ const Register= () => {
         const { name, value } = e.target
         setFormData(prevState => ({ ...prevState, [name]: value }))
       }
+
+      const phone = formData.telephone.replace(/[-\s]/g, "");
+      const formattedPhone = `+237${phone}`;
+
+      const sendSMS = async (phone, message) => {
+        const res = await fetch("/api/sendSMS", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone, message }),
+        });
+    
+        if (!res.ok) {
+          throw new Error("Failed to send SMS");
+        }
+    
+        return res.json();
+      };
     
       const handleSubmit = async (e) => {
         e.preventDefault()
@@ -34,8 +52,17 @@ const Register= () => {
           
           if (response.ok) {
             const data = await response.json()
+            const message = `Mr/Mme. ${formData.first_name}, votre Enregistrement sur Agrimarkets a été effectué avec succès.`;
+
+            toast.promise(sendSMS(formattedPhone, message), {
+              loading: "Envoi du SMS de confirmation...",
+              success: "SMS envoyé avec succès",
+              error: "Erreur lors de l'envoi du SMS",
+            });
+
             console.log('Utilisateur enregistré:', data)
             router.push('/login')
+
             // Rediriger ou afficher un message de succès
           } else {
             const error = await response.json()
