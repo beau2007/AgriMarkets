@@ -2,12 +2,13 @@
 import { useState} from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
 
 
 const Register= () => {
 
     const router = useRouter();
-
+    const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -21,9 +22,27 @@ const Register= () => {
         const { name, value } = e.target
         setFormData(prevState => ({ ...prevState, [name]: value }))
       }
+
+      const phone = formData.telephone.replace(/[-\s]/g, "");
+      const formattedPhone = `+237${phone}`;
+
+      const sendSMS = async (phone, message) => {
+        const res = await fetch("/api/sendSMS", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone, message }),
+        });
+    
+        if (!res.ok) {
+          throw new Error("Failed to send SMS");
+        }
+    
+        return res.json();
+      };
     
       const handleSubmit = async (e) => {
         e.preventDefault()
+        setIsLoading(true)
         try {
           const response = await fetch('api/auth/register', {
             method: 'POST',
@@ -33,8 +52,17 @@ const Register= () => {
           
           if (response.ok) {
             const data = await response.json()
+            const message = `Mr/Mme. ${formData.first_name}, votre Enregistrement sur Agrimarkets a été effectué avec succès.`;
+
+            toast.promise(sendSMS(formattedPhone, message), {
+              loading: "Envoi du SMS de confirmation...",
+              success: "SMS envoyé avec succès",
+              error: "Erreur lors de l'envoi du SMS",
+            });
+
             console.log('Utilisateur enregistré:', data)
             router.push('/login')
+
             // Rediriger ou afficher un message de succès
           } else {
             const error = await response.json()
@@ -97,7 +125,7 @@ const Register= () => {
                             <option value="livreur">Livreur</option>
                         </select>
                     </div>
-                    <button type="submit" className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-52 py-2.5 text-center dark:bg-green-600 dark:hover:bg-white-700 dark:focus:ring-white-800">Submit</button>
+                    <button type="submit" disabled={isLoading} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-52 py-2.5 text-center dark:bg-green-600 dark:hover:bg-white-700 dark:focus:ring-white-800">{isLoading ? 'Envoi...' :"S'inscrire"}</button>
                 </form>
             </div>
         </>

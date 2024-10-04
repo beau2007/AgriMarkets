@@ -3,16 +3,17 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 import PublishProductForm from '../Forms/Publication'; 
-import { signOut } from 'next-auth/react'; 
+import { signOut, getSession } from 'next-auth/react'; 
+import { getToken } from 'next-auth/jwt';
 // import Userprofil from '../corps/Userprofil'
 
 function HeaderApp() {
   const [showCartMenu, setShowCartMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false); 
-  const [role, setRole] = useState('');
+  const [user, setUser] = useState({}); 
 
-  const openModal = () =>{
+  const openModal = () =>{  
     setIsOpen(true);
   };
 
@@ -49,12 +50,14 @@ function HeaderApp() {
 
   // Fonction pour récupérer le rôle de l'utilisateur connecté
   useEffect(() => {
-    const fetchUserRole = async () => {
-      const userRole = await getUserRole(); // Ex: 'agriculteur', 'client'
-      setRole(userRole);
+    const fetchUser = async () => {
+      const session = await getSession();
+      if (session && session.user) {
+        setUser(session.user);
+      }
     };
 
-    fetchUserRole();
+    fetchUser();
   }, []);
 
   const toggleCartMenu = () => setShowCartMenu(!showCartMenu);
@@ -102,7 +105,7 @@ function HeaderApp() {
               </button>
 
               {/* Bouton "Publier un produit" affiché si l'utilisateur est agriculteur */}
-              {role === '' && (
+              {user.role === 'agriculteur' && (
                 <button
                   type="button"
                   className="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-4 py-2"
@@ -131,9 +134,9 @@ function HeaderApp() {
               />
               {/* Menu déroulant pour l'utilisateur */}
               {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg p-4">
-                  <p>Nom d'utilisateur : </p>
-                  <p>Email : </p>
+                <div className="absolute right-0 mt-2 w-64 bg-white text-black rounded-lg shadow-lg p-4">
+                  <p className='inline-flex'>Nom d'utilisateur : <span className='ml-2 font-semibold text-green-600'>{user.nom_user}</span>  </p>
+                  <p>Email : {user.email}</p>
                 </div>
               )}
               
