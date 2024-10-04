@@ -1,8 +1,5 @@
 'use client';
 
-
-
-
  import React, { useState } from 'react';
  import { Card, CardContent } from "../../ui/card";
  import { Button } from "../../ui/button";
@@ -80,7 +77,7 @@ import Image from 'next/image';
 
 
           <Card className="w-full max-w-md rounded-lg overflow-hidden shadow-lg transition-all hover:shadow-2xl">
-            <img
+            <Image
               src="/asset/images/banana.jpg"
               alt="Article cover"
               width="400"

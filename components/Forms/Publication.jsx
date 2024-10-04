@@ -100,6 +100,7 @@ export default function PublishProductForm({ closeModal }) {
         <input
           type="file"
           accept="image/*"
+          name="image"
           onChange={handleImageChange}
           className="w-full border border-gray-300 p-2 rounded-lg"
         />
