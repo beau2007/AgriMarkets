@@ -1,18 +1,26 @@
 'use client';
-import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
-import Formpublication from '../Forms/Publication'; 
+import PublishProductForm from '../Forms/Publication'; 
 import { signOut } from 'next-auth/react'; 
+// import Userprofil from '../corps/Userprofil'
 
 function HeaderApp() {
   const [showCartMenu, setShowCartMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [showForm, setShowForm] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false); 
   const [role, setRole] = useState('');
 
+  const openModal = () =>{
+    setIsOpen(true);
+  };
+
+  const closeModal = () =>{
+    setIsOpen(false);
+  };
+
+  
   // Fonction pour gérer la déconnexion
   const handleLogout = async () => {
     try {
@@ -36,6 +44,8 @@ function HeaderApp() {
       console.error('Erreur lors de la déconnexion', error);
     }
   };
+
+  
 
   // Fonction pour récupérer le rôle de l'utilisateur connecté
   useEffect(() => {
@@ -92,18 +102,23 @@ function HeaderApp() {
               </button>
 
               {/* Bouton "Publier un produit" affiché si l'utilisateur est agriculteur */}
-              {role === 'agriculteur' && (
+              {role === '' && (
                 <button
                   type="button"
                   className="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-4 py-2"
-                  onClick={() => setShowForm(true)} // Ouvre le formulaire pop-up
+                  onClick={() => openModal(true)}
                 >
                   Publier un produit
                 </button>
               )}
 
-              {/* Affichage du formulaire en pop-up */}
-              {showForm && <Formpublication onClose={handleCloseForm} />}
+              {isOpen && (
+                      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+                          <PublishProductForm closeModal={closeModal} />
+                        </div>
+                      </div>
+               )}
             </div>
 
             {/* Icône Utilisateur */}
@@ -112,6 +127,7 @@ function HeaderApp() {
                 icon={faUser}
                 className="text-xl cursor-pointer"
                 onClick={toggleUserMenu}
+                
               />
               {/* Menu déroulant pour l'utilisateur */}
               {showUserMenu && (
@@ -120,6 +136,7 @@ function HeaderApp() {
                   <p>Email : </p>
                 </div>
               )}
+              
             </div>
           </div>
 

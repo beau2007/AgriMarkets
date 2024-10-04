@@ -38,7 +38,7 @@ export default function AuthWrapper({ children }) {
     return (
       <>
         <Toaster position="top-center" />
-        <div className="mt-20 md:ml-64">{children}</div>
+        <div className="mt-4 md:ml-0">{children}</div>
       </>
     );
   }

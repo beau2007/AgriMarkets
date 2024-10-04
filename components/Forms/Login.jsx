@@ -11,6 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter()
 
   const handleSubmit = async (event) => {
@@ -28,7 +29,7 @@ const Login = () => {
         toast.error(result.error)
       } else {
         toast.success('Connexion réussie!')
-        router.push('/dashboard') // Redirigez vers la page souhaitée après la connexion
+        router.push('/composantApp') // Redirigez vers la page souhaitée après la connexion
       }
     } catch (error) {
       toast.error('Une erreur est survenue lors de la connexion')
@@ -36,6 +37,10 @@ const Login = () => {
       setIsLoading(false)
     }
   }
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <section className={style.identification}>
@@ -73,7 +78,11 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)} 
                   required 
                 />
+                <button type="button" onClick={togglePasswordVisibility}>
+                    {showPassword ? '🙈' : '👁️'}
+                </button>
               </div>
+
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
                   <div className="flex items-center h-5">

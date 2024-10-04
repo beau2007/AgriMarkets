@@ -1,126 +1,139 @@
-'use client'
-import { useState } from "react";
+import { useState } from 'react';
 
-
-
-function Formpublication({ onClose }) {
+export default function PublishProductForm({ closeModal }) {
   const [formData, setFormData] = useState({
-    nom_produits: '',
+    nom_produit: '',
     quantite: '',
     prix: '',
-    image: null,
     categorie: '',
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  const [image, setImage] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleImageUpload = (e) => {
-    setFormData((prevData) => ({ ...prevData, image: e.target.files[0].name }));
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Envoyer les données du formulaire à l'API
-    const response = await fetch('/api/produits', {
+    const formDataToSend = new FormData();
+    formDataToSend.append('nom_produit', formData.nom_produit);
+    formDataToSend.append('quantite', formData.quantite);
+    formDataToSend.append('prix', formData.prix);
+    formDataToSend.append('categorie', formData.categorie);
+    if (image) {
+      formDataToSend.append('image', image);
+    }
+
+    const response = await fetch('/api/produit', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
+      body: formDataToSend,
     });
 
     if (response.ok) {
-      const data = await response.json();
-      console.log('Produit ajouté avec succès :', data);
-      onClose(); // Fermer le formulaire après soumission
+      alert('Produit publié avec succès');
+      closeModal(); // Appel pour fermer la modal
     } else {
-      console.error('Erreur lors de l’ajout du produit');
+      alert('Erreur lors de la publication');
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg w-96">
-        <h2 className="text-xl mb-4">Publier un produit</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Nom du produit</label>
-            <input
-              type="text"
-              name="nom_produits"
-              value={formData.nom_produits}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Quantité</label>
-            <input
-              type="number"
-              name="quantite"
-              value={formData.quantite}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Prix</label>
-            <input
-              type="number"
-              name="prix"
-              value={formData.prix}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Image du produit</label>
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Catégorie</label>
-            <input
-              type="text"
-              name="categorie"
-              value={formData.categorie}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="flex justify-between">
-            <button
-              type="button"
-              className="bg-red-500 text-white py-2 px-4 rounded"
-              onClick={onClose}
-            >
-              Annuler
-            </button>
-            <button
-              type="submit"
-              className="bg-green-500 text-white py-2 px-4 rounded"
-            >
-              Publier
-            </button>
-          </div>
-        </form>
+    
+    <form onSubmit={handleSubmit} className="space-y-4">
+
+      <h1 className="text-4xl font-bold text-green-700 mb-6 capitalize">publier vos produits</h1>
+      {/* Formulaire pour la publication du produit */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Nom du produit
+        </label>
+        <input
+          type="text"
+          name="nom_produit"
+          placeholder="Nom du produit"
+          value={formData.nom_produit}
+          onChange={handleChange}
+          className="w-full border border-gray-300 p-2 rounded-lg"
+        />
       </div>
-    </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          quantite
+        </label>
+        <input
+          type="number"
+          name="quantite"
+          placeholder="quantite"
+          value={formData.quantite}
+          onChange={handleChange}
+          className="w-full border border-gray-300 p-2 rounded-lg"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          prix
+        </label>
+        <input
+          type="number"
+          name="prix"
+          placeholder="prix"
+          value={formData.prix}
+          onChange={handleChange}
+          className="w-full border border-gray-300 p-2 rounded-lg"
+        />
+      </div>
+
+      
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Téléverser une image
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="w-full border border-gray-300 p-2 rounded-lg"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          categorie
+        </label>
+        <input
+          type="text"
+          name="categorie"
+          placeholder="categorie"
+          value={formData.categorie}
+          onChange={handleChange}
+          className="w-full border border-gray-300 p-2 rounded-lg"
+        />
+      </div>
+
+      <div className="flex justify-between items-center">
+        <button
+          type="submit"
+          className="bg-green-600 text-white px-4 py-2 rounded-lg"
+        >
+          Publier
+        </button>
+        <button
+          type="button"
+          className="bg-red-600 text-white px-4 py-2 rounded-lg"
+          onClick={closeModal}
+        >
+          Annuler
+        </button>
+      </div>
+    </form>
   );
 }
-
-export default Formpublication;
