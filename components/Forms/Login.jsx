@@ -62,7 +62,7 @@ const Login = () => {
                   type="email" 
                   name="email" 
                   id="email" 
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                   placeholder="nom@exemple.com" 
                   onChange={(e) => setEmail(e.target.value)} 
                   required 
@@ -76,7 +76,7 @@ const Login = () => {
                   name="password" 
                   id="password" 
                   placeholder="••••••••" 
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                   onChange={(e) => setPassword(e.target.value)} 
                   required 
                 />
@@ -89,25 +89,25 @@ const Login = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
-                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-green-500 focus:ring-3 focus:ring-primary-600 dark:bg-green-700 dark:border-green-600 dark:focus:ring-green-600 dark:ring-offset-green-800" />
+                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-green-500 focus:ring-3 focus:ring-green-600 dark:bg-green-700 dark:border-green-600 dark:focus:ring-green-600 dark:ring-offset-green-800" />
                   </div>
                   <div className="ml-3 text-sm">
                     <label htmlFor="remember" className="text-gray-900 dark:text-gray-900">Se souvenir de moi</label>
                   </div>
                 </div>
-                <Link href="/restart" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
+                <Link href="/restart" className="text-sm font-medium text-green-600 hover:underline dark:text-green-500">
                   Mot de passe oublié?
                 </Link>
               </div>
               <button 
                 type="submit" 
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-primary-800"
+                className="w-full text-black dark:text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 disabled={isLoading}
               >
                 {isLoading ? 'Connexion...' : 'Connexion'}
               </button>
               <p className="text-sm font-light text-White-700 dark:text-white-400">
-                Vous n'avez pas encore de compte? <Link href="/register" className="font-medium text-primary-600 hover:underline dark:text-green-900">S'inscrire</Link>
+                Vous n'avez pas encore de compte? <Link href="/register" className="font-medium text-green-600 hover:underline dark:text-green-900">S'inscrire</Link>
               </p>
             </form>
           </div>

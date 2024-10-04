@@ -7,7 +7,7 @@ import Link from 'next/link';
 const Register= () => {
 
     const router = useRouter();
-
+    const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -24,6 +24,7 @@ const Register= () => {
     
       const handleSubmit = async (e) => {
         e.preventDefault()
+        setIsLoading(true)
         try {
           const response = await fetch('api/auth/register', {
             method: 'POST',
@@ -97,7 +98,7 @@ const Register= () => {
                             <option value="livreur">Livreur</option>
                         </select>
                     </div>
-                    <button type="submit" className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-52 py-2.5 text-center dark:bg-green-600 dark:hover:bg-white-700 dark:focus:ring-white-800">Submit</button>
+                    <button type="submit" disabled={isLoading} className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-52 py-2.5 text-center dark:bg-green-600 dark:hover:bg-white-700 dark:focus:ring-white-800">{isLoading ? 'Envoi...' :"S'inscrire"}</button>
                 </form>
             </div>
         </>
