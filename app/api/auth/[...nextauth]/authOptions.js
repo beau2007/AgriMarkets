@@ -45,11 +45,13 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role
+        token.nom_user = user.nom_user
       }
       return token
     },
     async session({ session, token }) {
       session.user.role = token.role
+      session.user.nom_user = token.nom_user;
       return session
     }
   },
