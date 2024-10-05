@@ -28,16 +28,10 @@ function HeaderApp() {
 
       // Si tu utilises un token JWT, tu peux supprimer celui-ci
       localStorage.removeItem('token'); 
-      sessionStorage.removeItem('token'); 
-
-
+      sessionStorage.removeItem('token');
 
     //   Si tu utilises next-auth pour l'authentification
-         await signOut({ callbackUrl: '/landingpage' }); 
-
-      
-    
-    
+         await signOut({ callbackUrl: '/landingpage' });
     
     // Sinon, redirige avec window.location
       window.location.href = '/landingpage'; 
@@ -45,8 +39,6 @@ function HeaderApp() {
       console.error('Erreur lors de la déconnexion', error);
     }
   };
-
-  
 
   // Fonction pour récupérer le rôle de l'utilisateur connecté
   useEffect(() => {
@@ -135,8 +127,9 @@ function HeaderApp() {
               {/* Menu déroulant pour l'utilisateur */}
               {showUserMenu && (
                 <div className="absolute right-0 mt-2 w-64 bg-white text-black rounded-lg shadow-lg p-4">
-                  <p className='inline-flex'>Nom d'utilisateur : <span className='ml-2 font-semibold text-green-600'>{user.nom_user}</span>  </p>
-                  <p>Email : {user.email}</p>
+                  <p className='inline-flex font-bold'>Nom d'utilisateur : <span className='ml-2 font-semibold text-green-600'>{user.nom_user}</span>  </p>
+                  <p className="font-bold">Email : {user.email}</p>
+                  <p className="font-bold">phone: {user.telephone}</p>
                 </div>
               )}
               

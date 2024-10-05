@@ -69,6 +69,7 @@ export async function POST(req) {
         prix: parseFloat(prix),
         categorie: categorie,
         imageUrl: imageUrl,
+        agriculturPhone: user.agriculteur.telephone,
         agriculturId: user.agriculteur.id,
       },
     });
