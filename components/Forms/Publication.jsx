@@ -65,7 +65,7 @@ export default function PublishProductForm({ closeModal }) {
           quantite
         </label>
         <input
-          type="number"
+          type="text"
           name="quantite"
           placeholder="quantite"
           value={formData.quantite}
