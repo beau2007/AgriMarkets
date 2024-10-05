@@ -46,10 +46,12 @@ export const authOptions = {
       if (user) {
         token.role = user.role
         token.nom_user = user.nom_user
+        token.id = user.id
       }
       return token
     },
     async session({ session, token }) {
+      session.user.id = token.id
       session.user.role = token.role
       session.user.nom_user = token.nom_user;
       return session
